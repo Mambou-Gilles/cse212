@@ -13,7 +13,19 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // Plan:
+        // 1. Create a new array of doubles with a size equal to the 'length' parameter.
+        // 2. Use a for-loop to iterate from 0 up to 'length - 1'.
+        // 3. For each iteration, calculate the multiple by multiplying 'number' by (index + 1).
+        // 4. Store that calculated value in the current index of the array.
+        // 5. Return the completed array.   
+        double[] multiples = new double[length];
+        for (int i = 0; i < length; i++)
+        {
+            multiples[i] = number * (i + 1);
+        }
+
+        return multiples; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +41,25 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // Plan:
+        // 1. Identify the starting index of the segment that needs to be moved to the front.
+        //    This is calculated as (data.Count - amount).
+        // 2. Use GetRange to capture the last 'amount' of elements into a temporary list.
+        // 3. Use RemoveRange to delete those same elements from the end of the original list.
+        // 4. Use InsertRange to place the captured elements at index 0 of the original list.
+
+        // If amount is the same as the count or 0, no rotation is needed.
+        if (amount <= 0 || amount >= data.Count) return;
+
+        // Step 1 & 2: Get the slice of data from the end
+        int startingIndex = data.Count - amount;
+        List<int> slice = data.GetRange(startingIndex, amount);
+
+        // Step 3: Remove those elements from the end
+        data.RemoveRange(startingIndex, amount);
+
+        // Step 4: Insert the slice at the beginning
+        data.InsertRange(0, slice);
     }
 }

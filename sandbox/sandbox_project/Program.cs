@@ -8,6 +8,10 @@ public class Program
         // with any code or ideas you have that do not directly apply to
         // one of your projects.
 
-        Console.WriteLine("Hello Sandbox World!");
+        Console.Write("What is your name? ");
+        string name = Console.ReadLine();
+        Console.Write("What is your age? ");
+        int age = int.Parse(Console.ReadLine());
+        Console.WriteLine("{0}, {1}", name, age);
     }
 }

@@ -35,6 +35,9 @@ public class PriorityQueueTests
         Assert.AreEqual("ItemA", result);
     }
 
+
+    //Added additional test cases to ensure all bugs are found and fixed. 
+
     [TestMethod]
     // Scenario: Enqueue an item that has the highest priority at the absolute end of the line: ItemA (Pri: 2), ItemB (Pri: 6).
     // Expected Result: ItemB is cleanly returned.

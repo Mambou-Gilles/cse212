@@ -13,7 +13,7 @@ public class PersonQueue
     /// <param name="person">The person to add</param>
     public void Enqueue(Person person)
     {
-        // FIXED: Change Insert(0, person) to Add(person) to place them at the back of the queue instead of the front.
+        // FIXED: Changed Insert(0, person) to Add(person) to place them at the back of the queue instead of the front.
         _queue.Add(person);
     }
 

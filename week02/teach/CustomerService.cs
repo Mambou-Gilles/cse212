@@ -13,7 +13,11 @@ public class CustomerService {
         // Test 1
         // Scenario: 
         // Expected Result: 
-        Console.WriteLine("Test 1");
+        // Console.WriteLine("Test 1");
+        // var service1 = new CustomerService(10);
+        // service1.AddNewCustomer();
+        // service1.ServeCustomer();
+
 
         // Defect(s) Found: 
 
@@ -23,6 +27,13 @@ public class CustomerService {
         // Scenario: 
         // Expected Result: 
         Console.WriteLine("Test 2");
+        var service2 = new CustomerService(6);
+        service2.AddNewCustomer();
+        service2.ServeCustomer();
+        Console.WriteLine($"First customer served: {service2}");
+        service2.AddNewCustomer();
+        service2.ServeCustomer();
+        Console.WriteLine($"Next customer served: {service2}");
 
         // Defect(s) Found: 
 
@@ -88,8 +99,9 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
         var customer = _queue[0];
+        _queue.RemoveAt(0);
+        
         Console.WriteLine(customer);
     }
 

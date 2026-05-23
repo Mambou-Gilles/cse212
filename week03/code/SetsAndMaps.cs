@@ -35,7 +35,7 @@ public static class SetsAndMaps
                 continue;
 
             // Reverse the two-letter (2-character) word
-            string reversedWord = $"{word[1]}{word[0]}";
+            string reversedWord = new string(new char[] { word[1], word[0] });
 
             // If the reverse was already tracked, we have a symmetric pair
             if (seenWords.Contains(reversedWord))

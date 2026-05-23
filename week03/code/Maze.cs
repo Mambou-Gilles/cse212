@@ -33,6 +33,15 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
+        var currentCoords = (_currX, _currY);
+        if (_mazeMap.ContainsKey(currentCoords) && _mazeMap[currentCoords][0])
+        {
+            _currX -= 1; // Move left reduces X
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -41,7 +50,15 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
-        // FILL IN CODE
+        var currentCoords = (_currX, _currY);
+        if (_mazeMap.ContainsKey(currentCoords) && _mazeMap[currentCoords][1])
+        {
+            _currX += 1; // Move right increases X
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -51,6 +68,15 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
+        var currentCoords = (_currX, _currY);
+        if (_mazeMap.ContainsKey(currentCoords) && _mazeMap[currentCoords][2])
+        {
+            _currY -= 1; // Move up decreases Y based on structural matrix layouts
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -59,7 +85,15 @@ public class Maze
     /// </summary>
     public void MoveDown()
     {
-        // FILL IN CODE
+        var currentCoords = (_currX, _currY);
+        if (_mazeMap.ContainsKey(currentCoords) && _mazeMap[currentCoords][3])
+        {
+            _currY += 1; // Move down increases Y based on structural matrix layouts
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     public string GetStatus()

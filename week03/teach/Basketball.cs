@@ -27,10 +27,29 @@ public class Basketball
             var fields = reader.ReadFields()!;
             var playerId = fields[0];
             var points = int.Parse(fields[8]);
+            // Add logic to aggregate the points for each player
+            if (players.ContainsKey(playerId)) {
+                players[playerId] += points; // Add points to existing player
+                } else {
+                    players[playerId] = points;  // Initialize player entry
+                }
+            }
+
+            // Convert the map to a sorted collection and get the top 10 players
+            var topTen = players.OrderByDescending(pair => pair.Value)
+                                .Take(10)
+                                .ToList();
+
+            // Display the results cleanly
+            Console.WriteLine("\n--- TOP 10 NBA CAREER SCORERS ---");
+            Console.WriteLine($"{"Rank",-6} | {"Player ID",-15} | {"Total Points",-12}");
+            Console.WriteLine(new string('-', 40));
+
+            int rank = 1;
+            foreach (var player in topTen) {
+                Console.WriteLine($"{rank,-6} | {player.Key,-15} | {player.Value,-12:N0}");
+                rank++;
         }
-
-        Console.WriteLine($"Players: {{{string.Join(", ", players)}}}");
-
-        var topPlayers = new string[10];
+        
     }
 }

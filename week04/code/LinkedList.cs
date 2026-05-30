@@ -33,6 +33,22 @@ public class LinkedList : IEnumerable<int>
     public void InsertTail(int value)
     {
         // TODO Problem 1
+        // Create new node
+        Node newNode = new(value);
+
+        // If the list is empty, then point both head and tail to the new node.
+        if (_head is null)
+        {
+            _head = newNode;
+            _tail = newNode;
+        }
+        // If the list is not empty, connect the links to the end of the list.
+        else
+        {
+            newNode.Prev = _tail; // Connect new node back to the current tail
+            _tail!.Next = newNode; // Connect current tail forward to the new node
+            _tail = newNode;      // Update the tail tracker to point to our new node
+        }
     }
 
 
@@ -65,6 +81,18 @@ public class LinkedList : IEnumerable<int>
     public void RemoveTail()
     {
         // TODO Problem 2
+        // If empty or only one item, clear out both tracking pointers
+        if (_head == _tail)
+        {
+            _head = null;
+            _tail = null;
+        }
+        // Otherwise, detach the link to the current tail and back up
+        else if (_tail is not null)
+        {
+            _tail.Prev!.Next = null; // Sever forward pointer of second-to-last node
+            _tail = _tail.Prev;      // Move tail pointer back one step
+        }
     }
 
     /// <summary>
@@ -109,6 +137,31 @@ public class LinkedList : IEnumerable<int>
     public void Remove(int value)
     {
         // TODO Problem 3
+        Node? curr = _head;
+        while (curr is not null)
+        {
+            if (curr.Data == value)
+            {
+                // If it's the head node, reuse RemoveHead
+                if (curr == _head)
+                {
+                    RemoveHead();
+                }
+                // If it's the tail node, reuse RemoveTail
+                else if (curr == _tail)
+                {
+                    RemoveTail();
+                }
+                // If it's in the middle, bypass the current node entirely
+                else
+                {
+                    curr.Prev!.Next = curr.Next;
+                    curr.Next!.Prev = curr.Prev;
+                }
+                return; // Match found and removed, exit early.
+            }
+            curr = curr.Next;
+        }
     }
 
     /// <summary>
@@ -117,6 +170,15 @@ public class LinkedList : IEnumerable<int>
     public void Replace(int oldValue, int newValue)
     {
         // TODO Problem 4
+        Node? curr = _head;
+        while (curr is not null)
+        {
+            if (curr.Data == oldValue)
+            {
+                curr.Data = newValue; // Directly rewrite internal data
+            }
+            curr = curr.Next; // Keep moving forward to catch any duplicates
+        }
     }
 
     /// <summary>
@@ -147,7 +209,12 @@ public class LinkedList : IEnumerable<int>
     public IEnumerable Reverse()
     {
         // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
+        var curr = _tail; // Start tracking at the back of the line
+        while (curr is not null)
+        {
+            yield return curr.Data; // Hand the item out to the foreach loop
+            curr = curr.Prev;      // Move backward towards the head pointer
+        }
     }
 
     public override string ToString()
